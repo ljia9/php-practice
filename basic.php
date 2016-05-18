@@ -14,13 +14,23 @@ function trueFalse($sym) {
     else print("False");
 }
 
-function fizzBuzz() {
-    foreach (range(0, 100) as $i) {
+function fizzBuzz($n) {
+    foreach (range(0, $n) as $i) {
         if ($i % 15 == 0) printe("fizzBuzz");
         elseif ($i % 5 == 0) printe("Buzz");
         elseif ($i % 3 == 0) printe("fizz");
         else printe($i);
     }
+}
+
+function reverseString($str) {
+    $ans = "";
+    $length = strlen($str)-1;
+    for ($i=$length; $i>=0; $i--) {
+        $char = substr($str, $i, 1);
+        $ans = $ans . $char;
+    }
+    return $ans;
 }
 
 function fermatTest($num, $k) {
@@ -88,6 +98,7 @@ list($a[0], $a[1], $a[2]) = $info;
 
 //fizzBuzz();
 //factor(100);
+//printe(reverseString("FortWlmore"));
 printe( trueFalse(fermatTest(997, 5)));
 printe( trueFalse(isPrime(337)));
 printe( trueFalse(isPrime(1132)));
