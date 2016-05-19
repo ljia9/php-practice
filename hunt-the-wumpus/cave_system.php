@@ -4,8 +4,11 @@ require('./cave.php');
 
 class CaveSystem 
 {
-    private $caves;
-
+    private $caves = array();
+    
+    public function getCaves() {
+        return $this->caves;
+    }
     public function initialize() {
         makeCaveMatrix;
         shuffleCaves();
@@ -13,7 +16,6 @@ class CaveSystem
     }
 
     private function makeCaves() {
-        $this->caves = array();
         for ($i=1; $i<=20; $i++) {
             array_push($this->caves, $i);
         } 
@@ -45,10 +47,11 @@ class CaveSystem
         }
         $this->caveMatrix = $z;
     }
+    /*
     private function startCaveVertices() {
     }
     private function startCaveFeatures(numBats, numPits) {
-
     }
+     */
 }
 
