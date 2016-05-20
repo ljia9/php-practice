@@ -5,22 +5,11 @@ function printe($string) {
     printf("\r\n");
 }
 
-function trueFalse($sym) {
-    if ($sym == "1") print("True");
-    else print("False");
-}
-
 #####################
 # Class Constructor #
 #####################
 
 class Board {
-
-    /* 
-    private $height = 5;
-    private $width = 5;
-    private $cells = array();
-    */
 
     public function initialize($arr, $h, $w) {
         $this->height = $h;
@@ -83,7 +72,6 @@ class Board {
             printe('');
         }
         printe('');
-
     }
 }
 
