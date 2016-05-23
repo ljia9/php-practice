@@ -13,13 +13,13 @@
 	  $BoardSizey =substr($BoardSize, 6, 3);
 	  $Pace= $_POST['SnakePace'];
 	  if($Pace=="Slow")
-	     $SnakePace=300;
+	     $SnakePace=150;
 	  else if($Pace=="Medium")
-	     $SnakePace=250;
-	  else if($Pace=="Fast")
-	     $SnakePace=200;
-	  else if($Pace=="Japan")
 	     $SnakePace=100;
+	  else if($Pace=="Fast")
+	     $SnakePace=70;
+	  else if($Pace=="Japan")
+	     $SnakePace=25;
 	  $Goals= $_POST['Goals'];
 	?>
  
@@ -44,10 +44,5 @@
 	$Score=0;
 	$snakePart = 2;
 	
-	//retrieve form parameters
-	$SnakePace = "<?php echo $SnakePace ?>";
-	$Goals = "<?php echo $Goals ?>";
-	$BoardSize1x = "<?php echo $BoardSizex ?>";
-	$BoardSize1y = "<?php echo $BoardSizey ?>";
 	
 ?>
