@@ -15,7 +15,7 @@
 	  if($Pace=="Slow")
 	     $SnakePace=150;
 	  else if($Pace=="Medium")
-	     $SnakePace=100;
+	     $SnakePace=110;
 	  else if($Pace=="Fast")
 	     $SnakePace=70;
 	  else if($Pace=="Japan")
