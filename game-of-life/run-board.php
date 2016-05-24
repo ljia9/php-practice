@@ -37,7 +37,7 @@ function main()
     elseif ($resp == "c") { $space->initialize($circle, 40, 40); view($space, 30, 50000); }
     elseif ($resp == "g") { $space->initialize($gosper, 70, 40); view($space, 130, 3000); }
     elseif ($resp == "p") { $space->initialize($pulsar, 16, 16); view($space, 50, 50000); }
-    elseif ($resp == "s") { $space->initialize($spaceship, 50, 30); view($space, 70, 50000); }
+    elseif ($resp == "s") { $space->initialize($spaceship, 60, 10); view($space, 80, 50000); }
     elseif ($resp == "t") { $space->initialize($toad, 10, 10); view($space, 50, 50000); }
     elseif ($resp == "m") { $space->initialize($ship, 50, 30); view($space, 50, 50000); }
     elseif ($resp == "q") { $resp = false; break; }

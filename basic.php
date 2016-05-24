@@ -1,8 +1,8 @@
 <?php
 
-##########################
-# functions defined here #
-##########################
+###################
+# helper functions#
+###################
 
 function printe($string) {
     printf($string);
@@ -13,6 +13,10 @@ function trueFalse($sym) {
     if ($sym == "1") printe("True");
     else print("False");
 }
+
+##########################
+# functions defined here #
+##########################
 
 function fizzBuzz($n) {
     foreach (range(0, $n) as $i) {
@@ -34,6 +38,7 @@ function reverseString($str) {
 }
 
 function fermatTest($num, $k) {
+    // fermatTest that does not necessarily work because of invalid fermat tests
     foreach (range(3, $k) as $i) {
         $a = rand(2, $num-2);
         $b = pow($a, ($num - 1));
@@ -43,6 +48,7 @@ function fermatTest($num, $k) {
 }
 
 function isPrime($num) {
+    // simple test if number is prime, not optimal
     if ($num == 2 or $num == 3 or $num ==5 or $num == 7) return true;
     if ($num % 2 == 0 and $num!=2) return false;
     if ($num % 3 == 0 and $num!=3) return false;
@@ -62,16 +68,18 @@ function factor($num) {
 }
 
 function collatz($num, $count) {
+    // dumb recursive version of collatz sequence
     if ($num == 1) return $count;
     if ($num % 2 == 0) { $n = $num / 2; $count++; return collatz($n, $count); }
     else { $n = 3*$num + 1; $count++; return collatz($n, $count); }
 }
 
 function partitionInt($seq) {
+    // find circular primes by circling around int by the ten's place
     $length = strlen((string)$seq);
     $ans = array();
     $s = $seq;
-    if (isPrime($seq)) return false;
+    if (isPrime($seq) == false) return false;
     foreach (range(1, $length) as $i) {
         $t = $s / 10;
         $s = $s % 10;
@@ -79,17 +87,76 @@ function partitionInt($seq) {
         //array_push($ans, $u);
         $s = $u;
         if (isPrime($u) == false) return false;
-        else continue;
     }
     return true;
+}
+
+function permute($num) {
+    // find the permuations of integers from 0 to $num badly
+    $ans = array();
+    $vals = array();
+    foreach (range(0,$num) as $val) { array_push($vals, $val); }
+    #for ($i=0; $i<gmp_fact(count($vals)); $i++) 
+    for ($i=0; $i<=$num; $i++) {
+        if ($i != 0) {
+            $t = $vals[0];
+            $vals[0] = $vals[count($vals)-1];
+            $vals[count($vals)-1] = $t;
+        }
+        for($j=1; $j<$num; $j++) {
+            $temp = $vals[$j];
+            $vals[$j] = $vals[$j+1]; 
+            $vals[$j+1] = $temp; 
+            var_dump($vals); 
+        }
+    }
+}
+
+function caesarEncrypt($message, $shiftNum) {
+    // simple caesar cipher to shift ascii value by specified shiftNum
+    $length = strlen($message);
+    $ans = "";
+    for ($i=0; $i<$length; $i++) {
+        $a = ord($message[$i]);
+        if ($a < 65 or $a > 122 or ($a >90 and $a < 97)) $ans = $ans . $message[$i];
+        elseif ($a >= 97 and $a <= 122) {
+            $b = ((($a%97) + $shiftNum)%26); 
+            if ($b < 0) $b += 26; // fix negative mod values here
+            $ans = $ans . chr($b + 97);
+        }
+        else {
+            $b = ((($a%65) + $shiftNum)%26); 
+            if ($b < 0) $b += 26;
+            $ans = $ans . chr($b + 65);
+        }
+    }
+    return $ans;
+}
+
+function caesarDecrypt($message, $shiftNum) {
+    // decrypt caesar cipher. Just reverse direction of shiftNum
+    $length = strlen($message);
+    $ans = "";
+    for ($i=0; $i<$length; $i++) {
+        $a = ord($message[$i]);
+        if ($a < 65 or $a > 122 or ($a >90 and $a < 97)) $ans = $ans . $message[$i];
+        elseif ($a >= 97 and $a <= 122) {
+            $b = ((($a%97) - $shiftNum)%26); 
+            if ($b < 0) $b += 26;
+            $ans = $ans . chr($b + 97);
+        }
+        else {
+            $b = ((($a%65) - $shiftNum)%26); 
+            if ($b < 0) $b += 26;
+            $ans = $ans . chr($b + 65);
+        }
+    }
+    return $ans;
 }
 
 ###########################
 # test the functions here #
 ###########################
-
-$operands = array(2, 10);
-//printe( $operands[0] + $operands[1]);
 
 $info = array('coffee', 'brown', 'caffeine');
 list($a[0], $a[1], $a[2]) = $info;
@@ -99,16 +166,21 @@ list($a[0], $a[1], $a[2]) = $info;
 //fizzBuzz();
 //factor(100);
 //printe(reverseString("FortWlmore"));
+permute(2);
 printe( trueFalse(fermatTest(997, 5)));
-printe( trueFalse(isPrime(337)));
-printe( trueFalse(isPrime(1132)));
+printe(caesarEncrypt("The QUick Brown foX Jumps Over the Lazy Dog", -3));
+printe(caesarDecrypt("Qeb NRfzh Yoltk clU Grjmp Lsbo qeb Ixwv Ald", -3));
 
-$count = 0;
-foreach (range(3, 100000) as $i) {
+###################
+# circular primes #
+###################
+/*
+$count = 1;
+foreach (range(3, 1000000, 2) as $i) {
     if (partitionInt($i) == true) $count++;
-    else continue;
 }
 printe($count);
+ */
 /*
  * find collatz chain lengths in slow way!
  *
