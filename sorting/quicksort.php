@@ -4,7 +4,7 @@
 # Define Quicksort #
 ####################
 
-function quicksort($arr) {
+function quicksort(&$arr) {
     // base case: if only one element, done partitioning/sorting
     if (count($arr) < 2) return $arr;
 
