@@ -23,8 +23,8 @@ function isSquare($arr) {
 function isMagicSquare($arr) {
     if (!isSquare($arr)) throw new Exception('Error: input is not a square!');
 
-    $magicNum = 0;
     $a = sqrt(count($arr));
+    $magicNum = ($a*(pow($a, 2) + 1)) / 2;
     $k = 0;
     
     for ($i=0; $i<$a; $i++) {
@@ -39,7 +39,6 @@ function isMagicSquare($arr) {
         for($j=$i; $j<count($arr); $j+=$a) {
             $sum1 += $arr[$j];
         }
-        if ($i==0) $magicNum = $sum;
         if ($sum != $magicNum or $sum1 != $magicNum) return false;
     }
 
