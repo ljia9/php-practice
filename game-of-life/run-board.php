@@ -12,6 +12,12 @@ function main()
     $circle  = array(array(15,19), array(17,20), array(18,19), array(19,19), array(18,18), array(19,18),array(18,17), array(19,17), array(18,16));
     $ship    = array(array(3,2), array(3,4), array(4,5), array(6,5), array(7,5), array(8,5), array(8,4), array(8,3), array(7,2));
     $space   = array(array(1,2), array(3,2), array(4,3), array(4,4), array(4,5), array(4,6), array(3,6), array(2,6), array(1,5));
+    $whoa    = array(array(19,19), array(19,20), array(20,19), array(20,20), array(21,21), array(22,21), array(22,20));
+    $lol     = array(
+                array(10,10),array(10,11),array(11,10),array(11,11),array(12,10),array(12,9),array(12,8),array(13,8),
+                array(13,14),array(14,14),array(15,14),array(13,16),array(14,16),array(15,16),array(14,17),
+                array(6,18),array(5,18),array(6,19),array(5,19),array(6,20),array(5,20)
+               );
     $fun     = array(
                 array(15,8),array(16,8), array(17,8), array(15,13), array(14,13),array(14,12),array(14,14),array(13,13),array(13,14),array(15,15),
                 array(10,17),array(9,18),array(9,19),array(11,18),array(11,19),array(10,19),array(12,19)
@@ -36,12 +42,14 @@ function main()
     while ($resp != false) {
         printe("\r\nWelcome!");
         printe("Watch my command line version of Conway's Game of Life! Type what object you want to see.");
-        $resp = readline("(b)linker, (c)ircle, (f)un, (g)osper, (p)lusar, (r)andom, (s)paceship, (t)oad, (m)ess, (q)uit: ");
+        $resp = readline("(b)linker, (c)ircle, (f)un, (g)osper, (l)ol, (p)lusar, (r)andom, (s)paceship, (t)oad, (m)ess, (w)hoa, (q)uit: ");
 
         if     ($resp == "b") { $board->initialize($blinker, 10, 10); view($board, 50, 50000); }
         elseif ($resp == "c") { $board->initialize($circle, 40, 40); view($board, 30, 50000);  }
         elseif ($resp == "f") { $board->initialize($fun, 40, 40); view($board, 230, 50000);    }
         elseif ($resp == "g") { $board->initialize($gosper, 70, 40); view($board, 130, 3000);  }
+        elseif ($resp == "w") { $board->initialize($whoa, 40, 40); view($board, 75, 50000);    }
+        elseif ($resp == "l") { $board->initialize($lol, 40, 40); view($board, 220, 50000);    }
         elseif ($resp == "p") { $board->initialize($pulsar, 16, 16); view($board, 50, 50000);  }
         elseif ($resp == "s") { $board->initialize($space, 60, 10); view($board, 80, 50000);   }
         elseif ($resp == "t") { $board->initialize($toad, 10, 10); view($board, 50, 50000);    }

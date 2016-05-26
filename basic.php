@@ -10,8 +10,15 @@ function printe($string) {
 }
 
 function trueFalse($sym) {
-    if ($sym == "1") printe("True");
+    if ($sym == "1") print("True");
     else print("False");
+}
+
+// swap elements from two specified points
+function swap(&$arr, $start, $end) {
+    $temp = $arr[$start];
+    $arr[$start] = $arr[$end];
+    $arr[$end] = $temp;
 }
 
 ##########################
@@ -37,8 +44,8 @@ function reverseString($str) {
     return $ans;
 }
 
+// fermatTest for prime numbers that does not necessarily work because of invalid fermat tests
 function fermatTest($num, $k) {
-    // fermatTest that does not necessarily work because of invalid fermat tests
     foreach (range(3, $k) as $i) {
         $a = rand(2, $num-2);
         $b = pow($a, ($num - 1));
@@ -47,8 +54,8 @@ function fermatTest($num, $k) {
     return true;
 }
 
+// simple test if number is prime, not optimal
 function isPrime($num) {
-    // simple test if number is prime, not optimal
     if ($num == 2 or $num == 3 or $num ==5 or $num == 7) return true;
     if ($num % 2 == 0 and $num!=2) return false;
     if ($num % 3 == 0 and $num!=3) return false;
@@ -63,19 +70,20 @@ function factor($num) {
     foreach (range(1, ceil(sqrt($num))) as $i) {
         if ($num % $i == 0) array_push($ans, $i);
     }
+    array_push($ans, $num);
     //print_r($ans);
     return $ans;
 }
 
+// dumb recursive version of collatz sequence
 function collatz($num, $count) {
-    // dumb recursive version of collatz sequence
     if ($num == 1) return $count;
     if ($num % 2 == 0) { $n = $num / 2; $count++; return collatz($n, $count); }
     else { $n = 3*$num + 1; $count++; return collatz($n, $count); }
 }
 
+// find circular primes by circling around int by the ten's place
 function partitionInt($seq) {
-    // find circular primes by circling around int by the ten's place
     $length = strlen((string)$seq);
     $ans = array();
     $s = $seq;
@@ -91,8 +99,8 @@ function partitionInt($seq) {
     return true;
 }
 
+// find the permuations of integers from 0 to $num badly
 function permute($num) {
-    // find the permuations of integers from 0 to $num badly
     $ans = array();
     $vals = array();
     foreach (range(0,$num) as $val) { array_push($vals, $val); }
@@ -112,8 +120,8 @@ function permute($num) {
     }
 }
 
+// simple caesar cipher to shift ascii value by specified shiftNum
 function caesarEncrypt($message, $shiftNum) {
-    // simple caesar cipher to shift ascii value by specified shiftNum
     $length = strlen($message);
     $ans = "";
     for ($i=0; $i<$length; $i++) {
@@ -133,8 +141,8 @@ function caesarEncrypt($message, $shiftNum) {
     return $ans;
 }
 
+// decrypt caesar cipher. Just reverse direction of shiftNum
 function caesarDecrypt($message, $shiftNum) {
-    // decrypt caesar cipher. Just reverse direction of shiftNum
     $length = strlen($message);
     $ans = "";
     for ($i=0; $i<$length; $i++) {
@@ -154,11 +162,39 @@ function caesarDecrypt($message, $shiftNum) {
     return $ans;
 }
 
+// reverse elements in an array between the index range i to j
+function reverseBetween($arr, $i, $j) {
+    while ($i < $j) {
+        swap($arr, $i, $j);
+        $i++;
+        $j--;
+    }
+    return $arr;
+}
+
+function wrapReverse($arr, $i, $j) {
+    // reverse elements in an array wrapping around the index range i to j
+    $length = count($arr);
+    $numSwaps = ($length - $j + $i) / 2;
+    $counter = 0;
+
+    while ($counter <= $numSwaps) {
+        swap($arr, $i, $j);
+        $i = ($i-1) % $length;
+        $j = ($j+1) % $length;
+        if ($i < 0) $i += $length; // fix negative mod values here
+
+        $counter++;
+    }
+    return $arr;
+}
+
 ###########################
 # test the functions here #
 ###########################
 
 $info = array('coffee', 'brown', 'caffeine');
+$sample = array(-57, -18, 2, 36, 50);
 list($a[0], $a[1], $a[2]) = $info;
 
 //var_dump($a);
@@ -166,7 +202,11 @@ list($a[0], $a[1], $a[2]) = $info;
 //fizzBuzz();
 //factor(100);
 //printe(reverseString("FortWlmore"));
-permute(2);
+//permute(2);
+print_r($sample);
+print_r(reverseBetween($sample, 0, 4));
+print_r(wrapReverse($sample, 1, 2));
+
 printe( trueFalse(fermatTest(997, 5)));
 printe(caesarEncrypt("The QUick Brown foX Jumps Over the Lazy Dog", -3));
 printe(caesarDecrypt("Qeb NRfzh Yoltk clU Grjmp Lsbo qeb Ixwv Ald", -3));
@@ -207,9 +247,7 @@ foreach (range(2, 200001) as $i) {
 $facs = factor(600851475143);
 $max = 2;
 foreach ($facs as $val) {
-    if (isPrime($val)) {
-        $max = $val;
-    }
+    if (isPrime($val)) { $max = $val; }
 }
 printe($max);
 
