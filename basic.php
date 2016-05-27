@@ -189,6 +189,15 @@ function wrapReverse($arr, $i, $j) {
     return $arr;
 }
 
+function stringEntropy($str) {
+    $sum = 0;
+    $length = strlen($str);
+    foreach (count_chars($str, 1) as $a) {
+        $sum -= ($a / $length) * log( ($a / $length), 2);
+    }
+    return $sum;
+}
+
 ###########################
 # test the functions here #
 ###########################
@@ -211,6 +220,7 @@ printe( trueFalse(fermatTest(997, 5)));
 printe(caesarEncrypt("The QUick Brown foX Jumps Over the Lazy Dog", -3));
 printe(caesarDecrypt("Qeb NRfzh Yoltk clU Grjmp Lsbo qeb Ixwv Ald", -3));
 
+printe(stringEntropy("Hello, world!"));
 ###################
 # circular primes #
 ###################

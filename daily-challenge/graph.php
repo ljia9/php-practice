@@ -46,13 +46,13 @@ class Graph {
         $arr = $this->adj[$v];
         $ans = array();
         foreach ($arr as $val) {
-            array_push($ans, $val);
+            array_push($ans, (int)$val);
         }
         return $ans;
     }
-    public function degree($node) {
-        $this->validateV($node);
-        return count($this->adj[$node]);
+    public function degree($v) {
+        $this->validateV($v);
+        return count($this->adj[$v]);
     }
 }
 
@@ -70,13 +70,3 @@ while (($line = fgets($f)) !== false) {
 }
 fclose($f);
 
-###################
-### Find degrees ##
-###################
-
-printe($g->getV());
-printe($g->getE());
-for ($i=1; $i<=$numVertices; $i++) {
-    printe("Node $i has a degree of " . $g->degree($i));
-}
-print_r($g->neighborsTo(15));
