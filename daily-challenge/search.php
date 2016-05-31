@@ -19,9 +19,9 @@ function bfs($graph, $start, $goal) {
     $visited = array();
     $q = new SplQueue();
 
-    $q->push(array($start));
+    $q->enqueue(array($start));
     while (!$q->isEmpty()) {
-        $path = $q->pop();
+        $path = $q->dequeue();
         $v = end($path);
         if ($v == $goal) return $path;
 
@@ -29,7 +29,7 @@ function bfs($graph, $start, $goal) {
             foreach ($graph->neighborsTo($v) as $val) {
                 $newPath = $path;
                 array_push($newPath, $val);
-                $q->push($newPath);
+                $q->enqueue($newPath);
             }
             array_push($visited, $v);
         }
@@ -70,8 +70,8 @@ for ($i=1; $i<=$g->getV(); $i++) {
 //print_r($g->neighborsTo(15));
 
 ###################
-# explore with bfs#
+##### explore #####
 ###################
 
-print_r(bfs($g, 2, 16));
-print_r(dfs($g, 2, 16));
+print_r(bfs($g, 3, 16));
+print_r(dfs($g, 3, 16));
