@@ -43,10 +43,8 @@ function fermatTest($num, $k) {
 }
 
 function isPrime($num) {
-    if ($num == 2 or $num == 3 or $num ==5 or $num == 7) return true;
-    if ($num % 2 == 0 and $num!=2) return false;
-    if ($num % 3 == 0 and $num!=3) return false;
-    foreach (range(3, ceil(sqrt($num))) as $i) {
+    if ($num == 2) return true;
+    foreach (range(2, floor(sqrt($num))+1) as $i) {
         if ($num % $i == 0) return false;
     }
     return true;
